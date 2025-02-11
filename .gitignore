@@ -1,0 +1,3 @@
+// filepath: /home/ixcsoft/Documentos/mqtt/.gitignore
+node_modules/
+dist/
