@@ -17,21 +17,29 @@ client.on("message", (topic, message) => {
   if (messageStr === "Ping") {
     contador++;
     client.publish(topic, "Pong", () => {
-      console.log("Pong" + " " + contador);
+      console.log(message + " " + contador);
     });
   } else if (messageStr === "Pong") {
     contador++;
     client.publish(topic, "Ping", () => {
-      console.log("Ping" + " " + contador);
+      console.log(message + " " + contador);
     });
   }
 
   if (contador === 10) {
     test_qos1();
+  }
+  if (contador === 15) {
     test_qos2();
   }
 
   if (contador === 40) {
+    console.log("aaaaaaaaaaaaaaa");
     clienteOn();
+  }
+
+  if (contador === 50) {
+    contador = 0;
+    client.disconnected;
   }
 });

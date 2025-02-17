@@ -28,7 +28,7 @@ const test_qos1 = () => {
       console.log("Mensagem QoS 1 publicada com sucesso");
     }
   });
-  client.end(); // Encerra a conexão com o broker para verificar se o QoS 2 manda a mensagem com ele desconectado
+  client.end();
 };
 const test_qos2 = () => {
   client.subscribe(Qos_2, { qos: 2 }, (err) => {
