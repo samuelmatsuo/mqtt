@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const connectToBroker = () => {
-  const brokerUrl = process.env.BROKER_URL || "mqtt://broker.hivemq.com";
+  const brokerUrl = process.env.BROKER_URL || "ssl://broker.hivemq.com";
 
   const options = {
     username: process.env.MQTT_USERNAME,

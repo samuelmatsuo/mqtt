@@ -11,6 +11,8 @@ client.on("connect", () => {
   client.publish(tableTopic, "Ping");
 });
 let contador = 0;
+let contadorQoS1 = 0;
+let contadorQoS2 = 0;
 
 client.on("message", (topic, message) => {
   const messageStr = message.toString();
@@ -27,19 +29,21 @@ client.on("message", (topic, message) => {
   }
 
   if (contador === 10) {
-    test_qos1();
+    contadorQoS1++;
+    console.log(`passando pela ${contadorQoS1}º no QoS1`);
+    test_qos1(contadorQoS1);
   }
   if (contador === 15) {
-    test_qos2();
+    contadorQoS2++;
+    console.log(`passando pela ${contadorQoS2}º no QoS2`);
+    test_qos2(contadorQoS2);
   }
 
-  if (contador === 40) {
-    console.log("aaaaaaaaaaaaaaa");
-    clienteOn();
+  if (contador === 20) {
+    clienteOn(client);
   }
 
-  if (contador === 50) {
+  if (contador === 25) {
     contador = 0;
-    client.disconnected;
   }
 });
