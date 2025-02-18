@@ -4,13 +4,18 @@ const client = connectToBroker();
 const Qos_1 = "Qos_1";
 const Qos_2 = "Qos_2";
 
-const test_qos1 = (contadorQoS2: any) => {
-  client.subscribe(Qos_1, { qos: 1 }, (err) => {
-    if (err) {
-      console.error("Erro ao se inscrever no tópico (QoS 1)", err);
-    } else {
-      console.log("Inscrito no tópico QoS 1");
-    }
+const test_qos1 = (contadorQoS1: any) => {
+  console.log("aaaaaaaaaaaa");
+
+  client.on("connect", () => {
+    client.subscribe(Qos_1, { qos: 1 }, () => {
+      console.log("Inscrito QoS 1");
+    });
+    client.publish(Qos_1, contadorQoS1.toString(), { qos: 1 }, () => {
+      console.log("Mensagem QoS 1 " + contadorQoS1);
+    });
+    client.on("error", (error) => console.error("QoS 1: " + error));
+    client.on("offline", () => console.log("Offline"));
   });
 
   client.on("message", (topic, message) => {
@@ -18,14 +23,8 @@ const test_qos1 = (contadorQoS2: any) => {
       console.log(`tópico: ${Qos_1}, mensagem: ${message}`);
     }
   });
+  console.log("aaaaaaaaaaaaaaaaaaaaaaasssssa");
 
-  client.publish(Qos_1, contadorQoS2.toString(), { qos: 1 }, (err) => {
-    if (err) {
-      console.error("Erro ao publicar a mensagem (QoS 1)", err);
-    } else {
-      console.log("Mensagem QoS 1 " + contadorQoS2);
-    }
-  });
   //client.end();
 };
 const test_qos2 = (contadorQoS2: any) => {
