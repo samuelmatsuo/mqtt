@@ -37,15 +37,18 @@ client.on("message", (topic, message) => {
   }
   //se o contador dos publish for 10 vai utilizar a qualidade de serviço nível 1
   if (contador === 10) {
+    client.unsubscribe(tableTopic);
     contadorQoS1++;
     console.log(`passando pela ${contadorQoS1}º no QoS1`);
-    client.disconnecting;
-    test_qos1(contadorQoS1);
+    test_qos1();
+    client.subscribe(tableTopic);
   }
   if (contador === 15) {
+    client.unsubscribe(tableTopic);
     contadorQoS2++;
     console.log(`passando pela ${contadorQoS2}º no QoS2`);
-    test_qos2(contadorQoS2);
+    test_qos2();
+    client.subscribe(tableTopic);
   }
 
   if (contador === 20) {
