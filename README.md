@@ -165,7 +165,3 @@ client.on("message", (topic, message) => {
 ## Referências
 
 Para mais informações sobre MQTT, QoS, LWT e TLS/SSL, acesse este [artigo](https://acesse.one/EpiPF).
-
----
-
-Espero que esta versão esteja mais completa e organizada! Se precisar de mais ajustes, é só avisar. 😊
